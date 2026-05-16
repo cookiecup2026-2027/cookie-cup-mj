@@ -15,15 +15,85 @@
       --dark2: #222;
       --brown: #412402;
       --amber: #854F0B;
+
+      /* Light mode tokens */
+      --bg: #ffffff;
+      --bg2: #f9f9f9;
+      --text: #1a1a1a;
+      --text-muted: #999;
+      --text-sub: #888;
+      --border: #f0f0f0;
+      --border2: #f5f5f5;
+      --card-bg: #ffffff;
+      --active-bg: #FAEEDA;
+      --active-text: #412402;
+      --summary-bg: #FAEEDA;
+      --drawer-bg: #ffffff;
+      --nav-bg: rgba(26,26,26,0.92);
+      --nav-border: #2a2a2a;
+      --nav-tag-color: #666;
+      --nav-tag-border: #333;
+      --placeholder-bg: #2a2a2a;
+      --placeholder-border: #333;
+      --placeholder-color: #555;
+    }
+
+    body.dark-mode {
+      --bg: #111111;
+      --bg2: #181818;
+      --text: #f0f0f0;
+      --text-muted: #777;
+      --text-sub: #666;
+      --border: #2a2a2a;
+      --border2: #222;
+      --card-bg: #1c1c1c;
+      --active-bg: #2d1e08;
+      --active-text: #EF9F27;
+      --summary-bg: #2d1e08;
+      --drawer-bg: #1c1c1c;
+      --nav-bg: rgba(10,10,10,0.95);
+      --nav-border: #1a1a1a;
+      --nav-tag-color: #555;
+      --nav-tag-border: #2a2a2a;
+      --placeholder-bg: #1a1a1a;
+      --placeholder-border: #2a2a2a;
+      --placeholder-color: #444;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: 'DM Sans', sans-serif;
-      background: #fff;
-      color: #1a1a1a;
+      background: var(--bg);
+      color: var(--text);
       overflow-x: hidden;
+      transition: background 0.35s ease, color 0.35s ease;
+    }
+
+    /* ── DARK MODE TOGGLE ── */
+    .dark-toggle {
+      background: none;
+      border: 1px solid var(--nav-tag-border);
+      border-radius: 20px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--nav-tag-color);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1;
+    }
+    .dark-toggle:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .dark-toggle .toggle-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     /* ── FLOATING PARTICLES ── */
@@ -57,10 +127,11 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background: rgba(26,26,26,0.92);
+      background: var(--nav-bg);
       backdrop-filter: blur(14px);
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid var(--nav-border);
       animation: slideDown 0.7s ease both;
+      transition: background 0.35s ease, border-color 0.35s ease;
     }
     @keyframes slideDown {
       from { transform: translateY(-100%); opacity: 0; }
@@ -86,12 +157,13 @@
     .logo:hover::after { transform: scaleX(1); }
     .nav-tag {
       font-size: 10px;
-      color: #666;
+      color: var(--nav-tag-color);
       letter-spacing: 2px;
       text-transform: uppercase;
-      border: 1px solid #333;
+      border: 1px solid var(--nav-tag-border);
       padding: 5px 12px;
       border-radius: 20px;
+      transition: color 0.35s, border-color 0.35s;
     }
 
     /* ── HERO ── */
@@ -277,13 +349,14 @@
       .precio-num { font-size: 52px; }
     }
     .ing-card {
-      border: 1px solid #f0f0f0;
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 1.25rem;
       display: flex;
       gap: 12px;
       align-items: flex-start;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s, background 0.35s;
+      background: var(--card-bg);
       opacity: 0;
       transform: translateY(20px);
       will-change: transform;
@@ -303,8 +376,8 @@
       transition: transform 0.3s;
     }
     .ing-card:hover .ing-emoji { transform: scale(1.25) rotate(-8deg); }
-    .ing-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
-    .ing-desc { font-size: 12px; color: #999; line-height: 1.4; }
+    .ing-name { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--text); }
+    .ing-desc { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
 
     /* ── DIVIDER ── */
     .divider {
@@ -404,7 +477,7 @@
       display: flex;
       gap: 18px;
       padding: 1.5rem 0;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--border);
       opacity: 0;
       transform: translateX(-20px);
       transition: opacity 0.5s, transform 0.5s;
@@ -429,8 +502,8 @@
       color: var(--brown);
       transform: scale(1.1);
     }
-    .paso h4 { font-size: 16px; font-weight: 500; margin-bottom: 5px; }
-    .paso p  { font-size: 13px; color: #999; line-height: 1.7; }
+    .paso h4 { font-size: 16px; font-weight: 500; margin-bottom: 5px; color: var(--text); }
+    .paso p  { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
 
     /* ── CTA ── */
     .cta-wrap {
@@ -546,11 +619,12 @@
       margin: 0 auto;
     }
     .calc-card {
-      background: #fff;
+      background: var(--card-bg);
       border-radius: 24px;
-      border: 1px solid #f0f0f0;
+      border: 1px solid var(--border);
       padding: 2.5rem 2rem;
       box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+      transition: background 0.35s, border-color 0.35s;
     }
     .calc-title {
       font-family: 'Playfair Display', serif;
@@ -560,7 +634,7 @@
     }
     .calc-sub {
       font-size: 14px;
-      color: #999;
+      color: var(--text-muted);
       margin-bottom: 2rem;
     }
     .calc-label {
@@ -578,8 +652,8 @@
       margin-bottom: 1.5rem;
     }
     .calc-size-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 1rem;
       cursor: pointer;
@@ -587,11 +661,11 @@
       transition: all 0.18s;
       font-family: 'DM Sans', sans-serif;
     }
-    .calc-size-btn:hover { border-color: var(--gold); background: #FAEEDA; }
-    .calc-size-btn.active { border: 2px solid var(--gold); background: #FAEEDA; }
-    .calc-size-name { font-size: 15px; font-weight: 500; color: #1a1a1a; display: block; }
-    .calc-size-price { font-size: 12px; color: #999; margin-top: 2px; display: block; }
-    .calc-size-btn.active .calc-size-name { color: var(--brown); }
+    .calc-size-btn:hover { border-color: var(--gold); background: var(--active-bg); }
+    .calc-size-btn.active { border: 2px solid var(--gold); background: var(--active-bg); }
+    .calc-size-name { font-size: 15px; font-weight: 500; color: var(--text); display: block; }
+    .calc-size-price { font-size: 12px; color: var(--text-muted); margin-top: 2px; display: block; }
+    .calc-size-btn.active .calc-size-name { color: var(--active-text); }
     .calc-flavor-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -599,30 +673,30 @@
       margin-bottom: 1.5rem;
     }
     .calc-flavor-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
       padding: 0.65rem 0.5rem;
       cursor: pointer;
       font-size: 13px;
       font-weight: 500;
-      color: #1a1a1a;
+      color: var(--text);
       text-align: center;
       transition: all 0.15s;
       font-family: 'DM Sans', sans-serif;
     }
     .calc-flavor-btn:hover { border-color: var(--gold); }
-    .calc-flavor-btn.active { border: 2px solid var(--gold); background: #FAEEDA; color: var(--brown); }
+    .calc-flavor-btn.active { border: 2px solid var(--gold); background: var(--active-bg); color: var(--active-text); }
     .calc-toggle-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.75rem 0;
-      border-bottom: 1px solid #f5f5f5;
+      border-bottom: 1px solid var(--border2);
     }
-    .calc-toggle-row:first-child { border-top: 1px solid #f5f5f5; }
-    .calc-toggle-label { font-size: 14px; color: #1a1a1a; }
-    .calc-toggle-sub { font-size: 12px; color: #bbb; }
+    .calc-toggle-row:first-child { border-top: 1px solid var(--border2); }
+    .calc-toggle-label { font-size: 14px; color: var(--text); }
+    .calc-toggle-sub { font-size: 12px; color: var(--text-muted); }
     .calc-toggle { position: relative; width: 40px; height: 22px; }
     .calc-toggle input { opacity: 0; width: 0; height: 0; }
     .calc-slider {
@@ -653,13 +727,13 @@
       margin: 1rem 0 1.5rem;
     }
     .calc-topping-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
       padding: 0.6rem 0.75rem;
       cursor: pointer;
       font-size: 13px;
-      color: #1a1a1a;
+      color: var(--text);
       text-align: left;
       display: flex;
       align-items: center;
@@ -668,12 +742,12 @@
       font-family: 'DM Sans', sans-serif;
     }
     .calc-topping-btn:hover { border-color: var(--gold); }
-    .calc-topping-btn.active { border: 2px solid var(--gold); background: #FAEEDA; }
+    .calc-topping-btn.active { border: 2px solid var(--gold); background: var(--active-bg); }
     .calc-check {
       width: 16px; height: 16px;
       border-radius: 4px;
-      border: 1px solid #ddd;
-      background: #fff;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-size: 10px;
@@ -689,30 +763,31 @@
     .calc-qty-btn {
       width: 36px; height: 36px;
       border-radius: 50%;
-      border: 1px solid #f0f0f0;
-      background: #fff;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       cursor: pointer;
       font-size: 20px;
-      color: #1a1a1a;
+      color: var(--text);
       display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
       font-family: 'DM Sans', sans-serif;
       line-height: 1;
     }
-    .calc-qty-btn:hover { border-color: var(--gold); background: #FAEEDA; }
-    .calc-qty-num { font-size: 22px; font-weight: 500; min-width: 28px; text-align: center; }
-    .calc-divider { border: none; border-top: 1px solid #f0f0f0; margin: 1.25rem 0; }
+    .calc-qty-btn:hover { border-color: var(--gold); background: var(--active-bg); }
+    .calc-qty-num { font-size: 22px; font-weight: 500; min-width: 28px; text-align: center; color: var(--text); }
+    .calc-divider { border: none; border-top: 1px solid var(--border); margin: 1.25rem 0; }
     .calc-summary {
-      background: #FAEEDA;
+      background: var(--summary-bg);
       border-radius: 16px;
       padding: 1.25rem;
       margin-bottom: 1rem;
+      transition: background 0.35s;
     }
     .calc-sum-row {
       display: flex;
       justify-content: space-between;
       font-size: 13px;
-      color: #888;
+      color: var(--text-sub);
       padding: 3px 0;
     }
     .calc-total-row {
@@ -723,7 +798,7 @@
       margin-top: 10px;
       padding-top: 10px;
     }
-    .calc-total-label { font-size: 14px; font-weight: 500; color: #1a1a1a; }
+    .calc-total-label { font-size: 14px; font-weight: 500; color: var(--text); }
     .calc-total-price { font-size: 28px; font-weight: 500; color: var(--amber); font-family: 'Playfair Display', serif; }
     .calc-wa-btn {
       display: flex;
@@ -744,7 +819,7 @@
       letter-spacing: 0.3px;
     }
     .calc-wa-btn:hover { opacity: 0.9; transform: scale(1.02); }
-    .calc-note { font-size: 12px; color: #bbb; text-align: center; margin-top: 0.75rem; }
+    .calc-note { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; }
     @media (max-width: 600px) {
       .calc-topping-grid { grid-template-columns: 1fr; }
     }
@@ -771,13 +846,13 @@
       max-height: 90vh;
       width: 92%;
       max-width: 440px;
-      background: #fff;
+      background: var(--drawer-bg);
       z-index: 201;
       border-radius: 24px;
       transform: translate(-50%, -50%) scale(0.92);
       opacity: 0;
       pointer-events: none;
-      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, background 0.35s;
       display: flex;
       flex-direction: column;
       overflow: hidden;
@@ -793,29 +868,29 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
     .drawer-header-title {
       font-family: 'Playfair Display', serif;
       font-size: 20px;
-      color: #1a1a1a;
+      color: var(--text);
     }
     .drawer-close {
       width: 36px;
       height: 36px;
       border-radius: 50%;
-      border: 1px solid #f0f0f0;
-      background: #fff;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       cursor: pointer;
       font-size: 18px;
-      color: #888;
+      color: var(--text-sub);
       display: flex;
       align-items: center;
       justify-content: center;
       transition: background 0.15s;
     }
-    .drawer-close:hover { background: #f5f5f5; }
+    .drawer-close:hover { background: var(--border); }
     .drawer-body {
       flex: 1;
       overflow-y: auto;
@@ -823,7 +898,7 @@
     }
     .drawer-footer {
       padding: 1rem 1.5rem 1.5rem;
-      border-top: 1px solid #f0f0f0;
+      border-top: 1px solid var(--border);
       flex-shrink: 0;
     }
     .d-label {
@@ -841,8 +916,8 @@
       margin-bottom: 1.25rem;
     }
     .d-size-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 0.85rem 0.75rem;
       cursor: pointer;
@@ -850,11 +925,11 @@
       transition: all 0.18s;
       font-family: 'DM Sans', sans-serif;
     }
-    .d-size-btn:hover { border-color: var(--gold); background: #FAEEDA; }
-    .d-size-btn.active { border: 2px solid var(--gold); background: #FAEEDA; }
-    .d-size-name { font-size: 14px; font-weight: 500; color: #1a1a1a; display: block; }
-    .d-size-price { font-size: 11px; color: #aaa; margin-top: 2px; display: block; }
-    .d-size-btn.active .d-size-name { color: var(--brown); }
+    .d-size-btn:hover { border-color: var(--gold); background: var(--active-bg); }
+    .d-size-btn.active { border: 2px solid var(--gold); background: var(--active-bg); }
+    .d-size-name { font-size: 14px; font-weight: 500; color: var(--text); display: block; }
+    .d-size-price { font-size: 11px; color: var(--text-muted); margin-top: 2px; display: block; }
+    .d-size-btn.active .d-size-name { color: var(--active-text); }
     .d-flavor-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -862,30 +937,30 @@
       margin-bottom: 1.25rem;
     }
     .d-flavor-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
       padding: 0.6rem 0.5rem;
       cursor: pointer;
       font-size: 13px;
       font-weight: 500;
-      color: #1a1a1a;
+      color: var(--text);
       text-align: center;
       transition: all 0.15s;
       font-family: 'DM Sans', sans-serif;
     }
     .d-flavor-btn:hover { border-color: var(--gold); }
-    .d-flavor-btn.active { border: 2px solid var(--gold); background: #FAEEDA; color: var(--brown); }
+    .d-flavor-btn.active { border: 2px solid var(--gold); background: var(--active-bg); color: var(--active-text); }
     .d-toggle-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0.65rem 0;
-      border-bottom: 1px solid #f5f5f5;
+      border-bottom: 1px solid var(--border2);
     }
-    .d-toggle-row:first-child { border-top: 1px solid #f5f5f5; }
-    .d-toggle-label { font-size: 13px; color: #1a1a1a; }
-    .d-toggle-sub { font-size: 11px; color: #ccc; }
+    .d-toggle-row:first-child { border-top: 1px solid var(--border2); }
+    .d-toggle-label { font-size: 13px; color: var(--text); }
+    .d-toggle-sub { font-size: 11px; color: var(--text-muted); }
     .d-toggle { position: relative; width: 38px; height: 20px; }
     .d-toggle input { opacity: 0; width: 0; height: 0; }
     .d-slider {
@@ -914,13 +989,13 @@
       margin: 0.75rem 0 1.25rem;
     }
     .d-topping-btn {
-      background: #fff;
-      border: 1px solid #f0f0f0;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
       border-radius: 10px;
       padding: 0.55rem 0.65rem;
       cursor: pointer;
       font-size: 12px;
-      color: #1a1a1a;
+      color: var(--text);
       text-align: left;
       display: flex;
       align-items: center;
@@ -929,12 +1004,12 @@
       font-family: 'DM Sans', sans-serif;
     }
     .d-topping-btn:hover { border-color: var(--gold); }
-    .d-topping-btn.active { border: 2px solid var(--gold); background: #FAEEDA; }
+    .d-topping-btn.active { border: 2px solid var(--gold); background: var(--active-bg); }
     .d-check {
       width: 15px; height: 15px;
       border-radius: 4px;
-      border: 1px solid #ddd;
-      background: #fff;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       font-size: 9px;
@@ -950,30 +1025,31 @@
     .d-qty-btn {
       width: 34px; height: 34px;
       border-radius: 50%;
-      border: 1px solid #f0f0f0;
-      background: #fff;
+      border: 1px solid var(--border);
+      background: var(--card-bg);
       cursor: pointer;
       font-size: 18px;
-      color: #1a1a1a;
+      color: var(--text);
       display: flex; align-items: center; justify-content: center;
       transition: all 0.15s;
       font-family: 'DM Sans', sans-serif;
       line-height: 1;
     }
-    .d-qty-btn:hover { border-color: var(--gold); background: #FAEEDA; }
-    .d-qty-num { font-size: 20px; font-weight: 500; min-width: 24px; text-align: center; }
-    .d-divider { border: none; border-top: 1px solid #f0f0f0; margin: 1rem 0; }
+    .d-qty-btn:hover { border-color: var(--gold); background: var(--active-bg); }
+    .d-qty-num { font-size: 20px; font-weight: 500; min-width: 24px; text-align: center; color: var(--text); }
+    .d-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
     .d-summary {
-      background: #FAEEDA;
+      background: var(--summary-bg);
       border-radius: 14px;
       padding: 1rem 1.1rem;
       margin-bottom: 1rem;
+      transition: background 0.35s;
     }
     .d-sum-row {
       display: flex;
       justify-content: space-between;
       font-size: 12px;
-      color: #888;
+      color: var(--text-sub);
       padding: 2px 0;
     }
     .d-total-row {
@@ -984,7 +1060,7 @@
       margin-top: 8px;
       padding-top: 8px;
     }
-    .d-total-label { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+    .d-total-label { font-size: 13px; font-weight: 500; color: var(--text); }
     .d-total-price { font-size: 26px; font-weight: 500; color: var(--amber); font-family: 'Playfair Display', serif; }
     .d-wa-btn {
       display: flex;
@@ -1004,7 +1080,7 @@
       font-family: 'DM Sans', sans-serif;
     }
     .d-wa-btn:hover { opacity: 0.9; transform: scale(1.01); }
-    .d-note { font-size: 11px; color: #bbb; text-align: center; margin-top: 0.5rem; }
+    .d-note { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 0.5rem; }
     .nav-cart-badge {
       display: inline-flex;
       align-items: center;
@@ -1022,6 +1098,10 @@
   <nav>
     <span class="logo">Cookie Cup MJ</span>
     <div style="display:flex;align-items:center;gap:12px;">
+      <button class="dark-toggle" id="darkToggle" onclick="toggleDarkMode()" title="Modo oscuro">
+        <span id="darkIcon">🌙</span>
+        <span class="toggle-label" id="darkLabel">Oscuro</span>
+      </button>
       <button onclick="openDrawer()" class="nav-cart-btn" style="display:inline-flex;align-items:center;justify-content:center;background:var(--gold);color:var(--brown);border:none;cursor:pointer;padding:9px 12px;border-radius:50px;font-size:18px;line-height:1;transition:transform 0.2s,opacity 0.2s;position:relative;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'" title="Arma tu pedido">🛒</button>
       <span class="nav-tag">Proyecto SENA</span>
     </div>
@@ -1263,6 +1343,29 @@
         nav.style.padding = '1rem 2rem';
       }
     });
+  </script>
+
+  <script>
+    /* ── DARK MODE ── */
+    function toggleDarkMode() {
+      const body = document.body;
+      const isDark = body.classList.toggle('dark-mode');
+      const icon = document.getElementById('darkIcon');
+      const label = document.getElementById('darkLabel');
+      icon.textContent = isDark ? '☀️' : '🌙';
+      label.textContent = isDark ? 'Claro' : 'Oscuro';
+      localStorage.setItem('darkMode', isDark ? '1' : '0');
+    }
+    // Restaurar preferencia al cargar
+    (function() {
+      if (localStorage.getItem('darkMode') === '1') {
+        document.body.classList.add('dark-mode');
+        const icon = document.getElementById('darkIcon');
+        const label = document.getElementById('darkLabel');
+        if (icon) icon.textContent = '☀️';
+        if (label) label.textContent = 'Claro';
+      }
+    })();
   </script>
 
   <!-- DRAWER OVERLAY -->
